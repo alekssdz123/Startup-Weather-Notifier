@@ -20,8 +20,6 @@ A simple Python application that displays the current weather as a desktop notif
 * Automatic configuration creation
 * Application uninstall option
 * Built-in application updater
-* OpenWeatherMap API error handling
-* OS-specific setup architecture
 
 ---
 
@@ -242,7 +240,6 @@ The installer will remove:
 * Linux dependency installation is currently manual.
 * Linux functionality has been tested only on Ubuntu 24.04.
 * macOS is not supported yet.
-* Windows console window is still visible during startup (planned improvement).
 
 ---
 
