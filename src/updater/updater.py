@@ -3,6 +3,7 @@ import shutil
 
 from zipfile import ZipFile
 from pathlib import Path
+from packaging.version import Version
 
 from src.updater.version import CURRENT_VERSION
 
@@ -18,10 +19,7 @@ def get_last_release():
 
 def check_new_release():
     latest_release = get_last_release()["tag_name"]
-
-    if CURRENT_VERSION != latest_release:
-        return True
-    return False
+    return Version(CURRENT_VERSION.lstrip("v")) < Version(latest_release.lstrip("v"))
 
 def download_repo_archive(download_url):
     response = requests.get(download_url)
@@ -67,7 +65,7 @@ def delete_temp_dir(temp_dir, archive_path):
 
 def update():
     release = get_last_release()
-    if release["tag_name"] != CURRENT_VERSION:
+    if check_new_release():
         archive_path = download_repo_archive(release["zipball_url"])
         print("Zip archive with update downloaded.")
 
